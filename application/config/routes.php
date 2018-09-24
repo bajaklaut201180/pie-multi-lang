@@ -49,8 +49,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['piecms'] = 'admin/login';
 $route['deadmin'] = 'admin/login';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// route multilanguage
+$route['^en/(.+)$'] = "$1";
+$route['^id/(.+)$'] = "$1";
+$route['^ch/(.+)$'] = "$1";
+
+// /en or /id URIs -> use default controller
+
+$route['^en$'] = $route['default_controller'];
+$route['^id$'] = $route['default_controller'];
+$route['^ch$'] = $route['default_controller'];

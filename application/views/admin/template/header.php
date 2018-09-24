@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url() ,'assets/css/font-awesome.min.css' ?>" />
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url() ,'assets/css/metisMenu.min.css' ?>" />
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url() ,'assets/css/admin/layout.css' ?>" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url() ,'assets/css/flag-icon.min.css' ?>" />
     <?php foreach($css as $style) echo '<link rel="stylesheet" type="text/css" media="screen" href="' ,base_url() ,'assets/css/' ,$style ,'.css" />'; ?>
 </head>
 <body>

@@ -35,7 +35,7 @@ class Section extends CI_Controller
     {
         $this->load->library('form_validation');
         $asset = array(
-            'title'     =>$this->title,
+            'title'     => 'Add ' .$this->title,
             'js'        =>array('ckeditor/adapters/jquery', 'ckeditor/ckeditor'),
             'css'       =>array()
         ); 
@@ -43,8 +43,14 @@ class Section extends CI_Controller
         $this->load->model($this->model);
         $model_name = $this->model;
 
-        $asset['sectionCategory'] = $this->$model_name->get();
-        // pre($asset['section']);
+        $sectionCategory = $this->$model_name->get();
+        foreach($sectionCategory as $row => $value) {
+            if($value['section_parent'] == '[parent]'){
+                $asset['sectionCategory'][$row] = $value; 
+            }
+        }
+
+
         $this->form_validation->set_rules('name_section', 'name_section', 'required');
         
         if($this->form_validation->run()==FALSE)
@@ -70,7 +76,7 @@ class Section extends CI_Controller
     {   
         $this->load->library('form_validation');
         $asset = array(
-            'title'     =>'View section',
+            'title'     =>'View ' .$this->title,
             'js'        => array('ckeditor/adapters/jquery', 'ckeditor/ckeditor'),
             'css'       => array(),
             'userdata'  => $this->session->userdata()
@@ -78,11 +84,17 @@ class Section extends CI_Controller
         
         $this->load->model($this->model);
         $model_name = $this->model;
-        $check_section = $this->$model_name->get($item_id);
-        
-        $asset['sectionCategory'] = $this->$model_name->get();
-        $asset['section'] = $check_section;
 
+        $asset['section'] = $this->$model_name->get($item_id);
+        
+        $sectionCategory = $this->$model_name->get();
+        foreach($sectionCategory as $row => $value) {
+            if($value['section_parent'] == '[parent]'){
+                if($value['section_id'] == $asset['section']['section_id']) continue;
+                $asset['sectionCategory'][$row] = $value; 
+            }
+        }
+        
         $this->form_validation->set_rules('name_section', 'name_section', 'required');
         
         if($this->form_validation->run()==FALSE)

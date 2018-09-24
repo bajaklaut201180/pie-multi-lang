@@ -66,7 +66,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>
-
+<a href="<?php echo base_url('language/english'); ?>">English</a> || <a href="<?php echo base_url('language/indonesia'); ?>">Indonesia</a>
+<hr />
 <div id="container">
 	<h1>Welcome to CodeIgniter!</h1>
 

@@ -1,4 +1,5 @@
-<?php if(!defined('BASEPATH')) exit ('No Direct Script Access Allowed');
+<?php 
+if(!defined('BASEPATH')) exit ('No Direct Script Access Allowed');
 
 if(!function_exists('checking_session')) {
     function checking_session()
@@ -11,13 +12,14 @@ if(!function_exists('checking_session')) {
     }
 }
 
-if(!function_exists('get_parent')) {
+/*if(!function_exists('get_parent')) {
     function get_parent()
     {
         $ci =& get_instance();
 
         $navigasi = array();
         $result = $ci->db->select('section_id')->select('section_name')->select('section_parent')->get('section')->result_array();
+
 
         foreach($result as $row => $value) {
             if($value['section_parent'] == 0) {
@@ -29,7 +31,7 @@ if(!function_exists('get_parent')) {
         return $result;
         // pre($result);
     }
-}
+}*/
 
 
 if(!function_exists('access_menu')) {
@@ -62,19 +64,6 @@ if(!function_exists('access_menu')) {
     }
 }
 
-if(!function_exists('get_privileges')) {
-    function get_privileges()
-    {
-        $ci =& get_instance();
-
-        $navigasi = array();
-        $result = $ci->db->get('privileges')->result_array();
-        
-
-        return $result;
-    }
-}
-
 if(!function_exists('get_privileges_status')) {
     function get_privileges_status($id)
     {
@@ -85,6 +74,36 @@ if(!function_exists('get_privileges_status')) {
         $result = $ci->db->get('privileges_status')->result_array();
         
 
+        return $result;
+    }
+}
+
+if(!function_exists('get_privileges')) {
+    function get_privileges($admin_id=null)
+    {
+        $ci =& get_instance();
+
+       if($admin_id == 1) { /* privileges for superadmin */
+            $ci->db->from('section');
+        }else{
+            $ci->db->select('privileges_status.admin_id');
+            $ci->db->select('section.section_id');
+            $ci->db->select('section.section_parent');
+            $ci->db->select('section.section_name');
+            $ci->db->select('privileges_status.privileges_status_read');
+            $ci->db->select('privileges_status.privileges_status_update');
+            $ci->db->select('privileges_status.privileges_status_delete');
+            $ci->db->from('privileges_status');
+            $ci->db->join('section', 'privileges_status.section_id = section.section_id');
+
+            $ci->db->where('privileges_status.admin_id', $admin_id);    
+        }
+        
+        
+        $query = $ci->db->get();
+
+        $result = $query->result_array();
+        // pre($result);
         return $result;
     }
 }
@@ -323,6 +342,29 @@ if(!function_exists('menu_navigasi_superadmin')) {
         }
         $result = $navigasi;
 
+        return $result;
+    }
+}
+
+if(!function_exists('adjustment_language')) {
+    function adjustment_language($session_lang = null)
+    {
+        $ci =& get_instance();
+        
+        if(!empty($session_lang)){
+            $result = $ci->db->where('lang_name', $session_lang)->get('language')->row_array();
+            return $result;
+        }else{
+            echo "empty";
+        }
+    }
+}
+
+if(!function_exists('list_language')) {
+    function list_language()
+    {
+        $ci =& get_instance();
+        $result = $ci->db->get_where('language', array('flag' => 1))->result_array();
         return $result;
     }
 }

@@ -1,10 +1,13 @@
 <?php defined('BASEPATH') OR exit('No Direct Script Access Allowed');
 
-class Login extends CI_Controller
+class Login extends MY_controller
 {
 
     function __construct() {
         parent::__construct();
+
+        // for multilanguage
+        $this->load_lang();
 
     }
 
@@ -34,6 +37,7 @@ class Login extends CI_Controller
                 $this->load->view('admin/template/top');
                 $this->load->view('admin/template/main_page');
                 $this->load->view('admin/template/footer'); 
+
             }
             else
             {
@@ -78,6 +82,7 @@ class Login extends CI_Controller
             }
             
             $this->session->set_userdata($response);  
+            
             redirect(base_url('admin/login'));
         
         }

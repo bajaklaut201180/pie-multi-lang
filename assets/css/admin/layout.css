@@ -28,6 +28,10 @@
   #main-navigasi .sidebar ul li a.active {
     background: #f7b733;
     color: #fff; }
+  #main-navigasi .dropdown-flag {
+    min-width: auto; }
+    #main-navigasi .dropdown-flag li.flag-active {
+      background: #f5f5f5; }
 
 #page-wrapper select.form-control.input-sm {
   background: #fc4a1a;
@@ -114,5 +118,10 @@ input[type='radio'].inactive-flag:checked:before {
 
 input[type='radio'].delete-flag:checked:before {
   background: black; }
+
+.btn-language {
+  background: #0E9683; }
+  .btn-language.active {
+    background: #0D7768; }
 
 /*# sourceMappingURL=layout.css.map */

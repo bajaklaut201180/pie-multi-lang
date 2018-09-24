@@ -26,7 +26,6 @@ class Banner extends CI_Controller
         $model_name = $this->model;
         
         $asset['banner'] = $this->$model_name->get();
-        //pre($this->session->userdata());
         
         $this->load->view('admin/template/header', $asset);
         $this->load->view('admin/template/top');

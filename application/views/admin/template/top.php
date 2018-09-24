@@ -1,3 +1,4 @@
+
 <nav id="main-navigasi" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="<?= base_url('deadmin'); ?>"><?php echo ($this->session->userdata()['user'])? $this->session->userdata()['user']['admin_username'] : "DEV"; ?></a> </div>
@@ -9,6 +10,16 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a> </li>
                 <li class="divider"></li>
                 <li><a href="<?php echo base_url('admin/login/logout'); ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a> </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-flag fa-fw"></i> <i class="fa fa-caret-down"></i> </a>
+            <ul class="dropdown-menu dropdown-flag">
+                <li class="flag-active"><a href="<?= base_url('admin/user'); ?>"><span class="flag-icon flag-icon-gb"></span></a> </li>
+                <li><a href="<?= base_url('admin/user'); ?>"><span class="flag-icon flag-icon-id"></span></a> </li>
+                <li><a href="<?= base_url('admin/user'); ?>"><span class="flag-icon flag-icon-cn"></span></a> </li>
             </ul>
         </li>
     </ul>
